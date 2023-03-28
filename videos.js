@@ -1,10 +1,13 @@
+use("youtube");
+
+db.videos.drop();
+
 db.createCollection("videos", {
   validator: {
-    jsonSchema: {
+    $jsonSchema: {
       bsonType: "object",
-      title: "videos Object Validation",
-        size: {
-        required:["title","description","size","file_name","state"],
+      title: "sales Object Validation",
+      required: ["title", "description", "size", "file_name", "state"],
       properties: {
         title: {
           bsonType: "string",
@@ -39,7 +42,7 @@ db.createCollection("videos", {
           bsonType: "array",
           items: {
             bsonType: "object",
-            required:["user_id","date","vote"],
+            required: ["user_id", "date", "vote"],
             properties: {
               user_id: {
                 bsonType: "objectId",
@@ -67,7 +70,7 @@ db.createCollection("videos", {
           bsonType: "array",
           items: {
             bsonType: "object",
-            required:["text","date"],
+            required: ["text", "date"],
             properties: {
               text: {
                 bsonType: "string",
@@ -100,4 +103,100 @@ db.createCollection("videos", {
       },
     },
   },
-}});
+});
+
+const video1 = {
+  title: "video1",
+  description: "this is a video",
+  size: 99,
+  file_name: "video1.mpeg",
+  playbacks: 100,
+  state: "public",
+  vote: [
+    {
+      user_id: ObjectId("642155d1545c6699fd25082c"),
+      date: new Date(),
+      vote: "like",
+    },
+    {
+      user_id: ObjectId("642155d1545c6699fd25082b"),
+      date: new Date(),
+      vote: "like",
+    },
+  ],
+  label: ["label1", "label2", "label3"],
+  comments: [
+    {
+      text: "this is a comment",
+      date: new Date(),
+      votes: [
+        {
+          user_id: ObjectId("642155d1545c6699fd25082b"),
+          vote: "like",
+        },
+        {
+          user_id: ObjectId("642155d1545c6699fd25082b"),
+          vote: "like",
+        },
+      ],
+    },
+  ],
+};
+
+const video2 = {
+    title: "video2",
+    description: "this is a video",
+    size: 99,
+    file_name: "video2.mpeg",
+    playbacks: 30,
+    state: "private",
+    
+    label: ["label5", "label6"],
+    comments: [
+      {
+        text: "this is a comment",
+        date: new Date(),
+        
+      },
+    ],
+  };
+
+  const video3 = {
+    title: "video3",
+    description: "this is a video",
+    size: 55,
+    file_name: "video3.mpeg",
+    playbacks: 366,
+    state: "public",
+    vote: [
+      {
+        user_id: ObjectId("642155d1545c6699fd25082c"),
+        date: new Date(),
+        vote: "like",
+      },
+      {
+        user_id: ObjectId("642155d1545c6699fd25082b"),
+        date: new Date(),
+        vote: "dislike",
+      },
+    ],
+    label: ["label11", "label12", "label13"],
+    comments: [
+      {
+        text: "this is a comment",
+        date: new Date(),
+        votes: [
+          {
+            user_id: ObjectId("642155d1545c6699fd25082b"),
+            vote: "dislike",
+          },
+          {
+            user_id: ObjectId("642155d1545c6699fd25082b"),
+            vote: "dislike",
+          },
+        ],
+      },
+    ],
+  };
+
+db.videos.insertMany([video1,video2,video3])
