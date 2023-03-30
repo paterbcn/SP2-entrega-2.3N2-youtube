@@ -26,10 +26,10 @@ db.createCollection("users", {
           bsonType: "date",
           description: "'birthdate' must be date and is required",
         },
-        sex: {
+        gender: {
           bsonType: "string",
           enum: ["male", "female"],
-          description: "'sex' must be male or female and is required",
+          description: "'gender' must be male or female and is required",
         },
         country: {
           bsonType: "string",
@@ -108,7 +108,7 @@ const user1 = {
   email: "usu@email.com",
   password: "aaaaa",
   birthdate: new Date("1995-01-01"),
-  sex: "female",
+  gender: "female",
   country: "spain",
   postal_code: 08001,
   channel: [
@@ -151,7 +151,7 @@ const user2 = {
   email: "usu2@email.com",
   password: "111111",
   birthdate: new Date("1985-01-01"),
-  sex: "male",
+  gender: "male",
   country: "usa",
   postal_code: 99999,
   channel: [
@@ -203,7 +203,7 @@ const user3 = {
   email: "usu3@email.com",
   password: "888888",
   birthdate: new Date("1999-01-01"),
-  sex: "male",
+  gender: "male",
   country: "spain",
   postal_code: 08952,
   channel: [
